@@ -28,6 +28,21 @@ io.on('connection', (socket) => {
 
   socket.on('createMessage', (message) => {
     console.log('createMessage', message);
+
+    // socket.emit from admin text welcome to the chat app
+    socket.emit('initialMessage', {
+        from: 'Admin',
+        text: 'Welcome to the chat app',
+        createdAt: new Date().getTime()
+    })
+
+    // socket.broadcast.emit from admint next new user joined
+    socket.broadcast.emit('newMessage', {
+        from: 'Admin',
+        text: 'New user has joined the chat app',
+        createdAt: new Date().getTime()
+    })
+
     io.emit('newMessage', {
       from: message.from,
       text: message.text,
