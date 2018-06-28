@@ -29,14 +29,18 @@ io.on('connection', (socket) => {
         createdAt: new Date().getTime()
     })
 
-    // socket.broadcast.emit from admint next new user joined
-    socket.broadcast.emit('newMessage', {
-        from: 'Admin',
-        text: 'New user has joined the chat app',
-        createdAt: new Date().getTime()
+    socket.on('createMessage', (message, callback) => {
+        console.log('createMessage', message)
+        io.emit('newMessage', generateMessage(message.from, message.text));
+        callback('This is from the server');
     })
-
-    io.emit('newMessage', generateMessage(message.from, message.text));
+    // socket.broadcast.emit from admint next new user joined
+    // socket.broadcast.emit('newMessage', {
+    //     from: 'Admin',
+    //     text: 'New user has joined the chat app',
+    //     createdAt: new Date().getTime()
+    // })
+    
     // socket.broadcast.emit('newMessage', {
     //   from: message.from,
     //   text: message.text,
