@@ -1,6 +1,6 @@
 var socket = io();
 
-function scrollToButtom() {
+function scrollToBottom() {
     var messages = jQuery('#message');
     var newMessage = messages.children('li:last-child');
     var clientHeight = messages.prop('clientHeight');
@@ -8,7 +8,9 @@ function scrollToButtom() {
     var scrollHeight = messages.prop('scrollHeight');
     var newMessageHeight = newMessage.innerHeight();
     var lastMessageHeight = newMessage.prev().innerHeight();
-    if(clientHeight + scrollTop + lastMessageHeight + newMessageHeight >= scrollHeight);
+    if(clientHeight + scrollTop + lastMessageHeight + newMessageHeight >= scrollHeight){
+        message.scrollTop(scrollHeight);
+    }
 }
 
 socket.on('connect', function () {
