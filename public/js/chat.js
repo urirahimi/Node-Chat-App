@@ -1,4 +1,5 @@
 var socket = io();
+var moment = require('moment');
 
 function scrollToBottom() {
     var messages = jQuery('#message');
